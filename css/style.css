@@ -1,0 +1,156 @@
+
+
+body{
+    margin: 0%;
+    background-color:#18273D ;
+}
+
+
+.header{
+    margin: 0%;
+    background-color: #1D3752;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+#title {
+margin: 0%;
+font-size: 300%;
+color:whitesmoke
+
+}
+
+.content {
+     display: flex;
+justify-content: center;
+align-items: center;
+  flex-direction: column;
+
+height: 50%;
+}
+
+#bigTitle{
+    margin-top: 10%;
+    margin-bottom: 0;
+font-size: 500%;
+color:#65EFBD;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#bySolixman{
+    color: rgb(241, 243, 244);
+    margin-top: 0;
+    font-weight: 10;
+    font-family: 'Times New Roman', Times, serif;
+    text-transform: capitalize;
+}
+
+
+.logo {
+    position: absolute;
+    width:100%;
+    height: 10%;
+    display: flex;
+    justify-content: start;
+}
+
+#logo_img{
+    height: 100%;
+}
+
+.GridNumber{
+    width: 100%;
+      display: flex;
+    align-items: center ;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#GridNumber{
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    /* flex-direction: column; */
+    margin-top: 2%;
+    width: 100%;  
+    height: 50%;  
+    font-size: 130%;
+}
+
+.GridNumber label{
+    color: #80A6B1;
+    font-size: 170%;
+    margin-right: 2%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;   
+    
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  color: white;
+  
+}
+
+
+
+.input {
+  width: 200px;
+  height: 60px;
+  border: none;
+  outline: none;
+  padding: 0px 7px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px 10px rgba(0,0,0,1),
+  -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  color:#80A6B1 ;
+}
+
+input[type="number"] {
+  color: #80A6B1;          
+  font-size: 1.8vw;             
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;        
+  text-align: center;       
+  background-color: #18273D; 
+  border: 0.3vh solid #1D3752;
+  padding: 1vh 1vw;       
+  border-radius: 0.5vw;   
+  width:20%;              
+  max-width: 200px;        
+  min-width: 200px;        
+}
+
+.PlayButton{
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+#PlayButton {
+    margin-top: 15%;
+    height: 9vh;
+    width : 15vw;
+    background-color: #64EFBD;
+    font-size: 190%;
+    font: bold;
+    border-radius: 15px;
+}
