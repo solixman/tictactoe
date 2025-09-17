@@ -164,8 +164,8 @@ align-items: center;
 }
 
 #gridBoxes {
-  width: 80vh;
-  height: 80vh;
+  width: 70vh;
+  height: 7é0vh;
   display: grid;
   gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
@@ -179,7 +179,8 @@ align-items: center;
   height: 100%;
   display: grid;
   gap: 6px;                       
-  background-color: #8cabd9;       
+  background-color: #8cabd9;   
+      
 }
 
 #boxes > div {
