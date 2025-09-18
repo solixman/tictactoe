@@ -19,25 +19,26 @@ function Play() {
     body.innerHTML = `
     
 <div class="main" >
+<div style="display: flex; justify-content: center; align-items: center; margin =0">
+<h3 id='gameStatus'></h3>
+</div>
 <div class="gamePage" >
 
 <div id="grid">
 <div id="gridBoxes">
 
-<h3 class='gameStatus'></h3>
 
 
 <div id="boxes">
 <p>hiiiiiii</p>
-       </div>
+</div>
 
-       </div>
-       </div>
-       
+</div>
+</div>
+
+
        <div class="ActionButtons">
-       
-       <--<button id="resetButton" type='button' onclick=setUpGrid() button>Reset game</button>-->
-       
+     
        <button id="StartNewGameButton" type='button' onclick=setUpGrid() button>Start New Game </button>
        
        </div>
@@ -57,6 +58,10 @@ function Play() {
     
     function setUpGrid() {
         
+        document.getElementById('gameStatus').innerHTML = `
+        <h3 style="">it's ${ currentPlayer }'s turn </h3>
+        `;
+         
         GN =localStorage.getItem("GridNumber");
         let boxes = document.getElementById('boxes');
         
@@ -114,6 +119,9 @@ function pressBox(box) {
        
           clicked.push({"X":i});
        currentPlayer="O";
+       document.getElementById('gameStatus').innerHTML = `
+        <h3 style="">it's ${ currentPlayer }'s turn </h3>
+        `;
     }
     else if (currentPlayer === "O") {
         box.innerHTML=`
@@ -126,6 +134,9 @@ function pressBox(box) {
         
         clicked.push({"O":i});
         currentPlayer="X" 
+        document.getElementById('gameStatus').innerHTML = `
+        <h3 style="">it's ${ currentPlayer }'s turn </h3>
+        `;
     }
 
     console.log(clicked);

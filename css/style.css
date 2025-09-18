@@ -166,9 +166,26 @@ align-items: center;
     border-radius: 15px;
 }
 
+
+.ActionButtons{
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+#StartNewGameButton{
+    height: 9vh;
+    width : 15vw;
+    background-color: #64EFBD;
+    font-size: 190%;
+    font: bold;
+    border-radius: 15px;
+}
+
   #grid {
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -176,7 +193,7 @@ align-items: center;
 
 #gridBoxes {
   width: 70vh;
-  height: 7é0vh;
+  height: 70vh;
   display: grid;
   gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
@@ -202,4 +219,10 @@ align-items: center;
   aspect-ratio: 1 / 1;            
   font-size: clamp(8px, 2vw, 18px);
   font-weight: bold;
+}
+
+
+#gameStatus{
+  color: #80A6B1;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
