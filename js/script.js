@@ -12,6 +12,11 @@ function Play() {
         let k = document.getElementById('k').value;
         localStorage.setItem("k",k);
         console.log(k);
+
+        if(k>GridNumber){
+            alert('k cannot be bigger than the grid number');
+            return;
+        }
     
 
     
