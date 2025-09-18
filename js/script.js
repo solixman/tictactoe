@@ -6,12 +6,12 @@ function Play() {
         let GridNumber = document.getElementById('GridNumber').value;
         localStorage.setItem("GridNumber",GridNumber);
         
-        console.log(GridNumber);
+        
   
     
         let k = document.getElementById('k').value;
         localStorage.setItem("k",k);
-        console.log(k);
+        
 
         if(k>GridNumber){
             alert('k cannot be bigger than the grid number');
@@ -82,7 +82,6 @@ function Play() {
             
             </div>
             
-            
         `
       
 
@@ -104,23 +103,28 @@ localStorage.setItem("scoreO",0);
 
 
 function pressBox(box) {
-    i=box.getAttribute("data-cell-index");
-    
-    box.innerHTML="";
-    
     if(!gameActive){
         return;
     }
+    if (box.getAttribute("data-played")) {
+        return; 
+    }
+
+    
+     i=box.getAttribute("data-cell-index");
+    
+
+    box.innerHTML="";
+    
     
     if(currentPlayer === "X"){
         
         
         box.innerHTML=`
-        <div data-cell-index = ${i}  id="box" onclick="pressBox(this)">
+        <div data-cell-index = ${i}  id="box">
         <img src="/src/icons/X.png" alt="X" style="width:95%; height:95%;">
         </div>
         `
-       console.log(i);
        
           clicked.push({"X":i});
        currentPlayer="O";
@@ -130,12 +134,12 @@ function pressBox(box) {
     }
     else if (currentPlayer === "O") {
         box.innerHTML=`
-        <div data-cell-index = ${i}  id="box" onclick="pressBox(this)">
+        <div data-cell-index = ${i}  id="box"">
         <img src="/src/icons/O.png" alt="X" style="width:95%; height:95%;">
         </div>
         `
 
-        console.log(i);
+    
         
         clicked.push({"O":i});
         currentPlayer="X" 
@@ -143,8 +147,9 @@ function pressBox(box) {
         <h3 style="">it's ${ currentPlayer }'s turn </h3>
         `;
     }
+    box.setAttribute("data-played", "true");
 
-    console.log(clicked);
+  
 
 }
 
