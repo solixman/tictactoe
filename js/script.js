@@ -44,7 +44,7 @@ function Play() {
 
        <div class="ActionButtons">
      
-       <button id="StartNewGameButton" type='button' onclick=setUpGrid() button>Start New Game </button>
+       <button id="StartNewGameButton" type='button' onclick=intialiseGame() button>Start New Game </button>
        
        </div>
        
@@ -88,7 +88,6 @@ function Play() {
 
     }
     
-    
 }
 
 
@@ -110,7 +109,7 @@ function pressBox(box) {
         return; 
     }
 
-    
+
      i=box.getAttribute("data-cell-index");
     
 
@@ -156,6 +155,9 @@ function pressBox(box) {
 
 function intialiseGame(){
 clicked = [];
- 
-
+setUpGrid();
 }
+
+
+
+
