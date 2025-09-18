@@ -1,15 +1,24 @@
 
 
 function Play() {
-    let GridNumber = document.getElementById('GridNumber').value;
-    localStorage.setItem("GridNumber",GridNumber);
 
-    let k = document.getElementById('k').value;
-    localStorage.setItem("k",k);
+
+        let GridNumber = document.getElementById('GridNumber').value;
+        localStorage.setItem("GridNumber",GridNumber);
+        
+        console.log(GridNumber);
+  
+    
+        let k = document.getElementById('k').value;
+        localStorage.setItem("k",k);
+        console.log(k);
+    
 
     
     let body = document.getElementById('main');
     body.innerHTML = `
+    
+<div class="main" >
 <div class="gamePage" >
 
 <div id="grid">
@@ -27,26 +36,28 @@ function Play() {
        
        <div class="ActionButtons">
        
-       <button id="resetButton" type='button' onclick=Play() button>Reset game</button>
+       <--<button id="resetButton" type='button' onclick=setUpGrid() button>Reset game</button>-->
        
-       <button id="StartNewGameButton" type='button' onclick=intialiseGame() button>Start New Game </button>
-       
-       </div>
+       <button id="StartNewGameButton" type='button' onclick=setUpGrid() button>Start New Game </button>
        
        </div>
+       
+       </div>
+       </div>
+        
        
        `
        
-       setUpGrid(GridNumber)
+       setUpGrid()
        
     }
     
     
     
     
-    function setUpGrid(GN) {
+    function setUpGrid() {
         
-        
+        GN =localStorage.getItem("GridNumber");
         let boxes = document.getElementById('boxes');
         
         boxes.innerHTML = "";
