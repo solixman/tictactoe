@@ -29,7 +29,7 @@ function Play() {
        
        <button id="resetButton" type='button' onclick=Play() button>Reset game</button>
        
-       <button id="StartNewGameButton" type='button' onclick=Play() button>Start New Game </button>
+       <button id="StartNewGameButton" type='button' onclick=intialiseGame() button>Start New Game </button>
        
        </div>
        
@@ -57,13 +57,13 @@ function Play() {
         for (let i = 0; i < GN * GN; i++) {
             
             boxes.innerHTML += `    
-            <div data-cell-index = ${i}  id="box" onclick="pressBox(this)">
+            <div data-cell-index = ${i+1}  id="box" onclick="pressBox(this)">
             
             </div>
             
             
         `
-        
+      
 
 
     }
@@ -77,10 +77,14 @@ let currentPlayer="X";
 let gameActive=true;
 localStorage.setItem("scoreX",0);
 localStorage.setItem("scoreO",0);
+  let clicked = [];
+
+
 
 
 function pressBox(box) {
     i=box.getAttribute("data-cell-index");
+    
     box.innerHTML="";
     
     if(!gameActive){
@@ -95,7 +99,10 @@ function pressBox(box) {
         <img src="/src/icons/X.png" alt="X" style="width:95%; height:95%;">
         </div>
         `
-        currentPlayer="O";
+       console.log(i);
+       
+          clicked.push({"X":i});
+       currentPlayer="O";
     }
     else if (currentPlayer === "O") {
         box.innerHTML=`
@@ -103,16 +110,20 @@ function pressBox(box) {
         <img src="/src/icons/O.png" alt="X" style="width:95%; height:95%;">
         </div>
         `
-        currentPlayer="X"
+
+        console.log(i);
         
-            console.log(localStorage.getItem("k"));
-            console.log(localStorage.getItem("GridNumber"));
-            
+        clicked.push({"O":i});
+        currentPlayer="X" 
     }
-    
-    
 
-
+    console.log(clicked);
 
 }
 
+
+function intialiseGame(){
+clicked = [];
+ 
+
+}
