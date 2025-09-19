@@ -1,5 +1,4 @@
 
-
 function Play() {
 
 
@@ -9,6 +8,14 @@ function Play() {
     let k = document.getElementById('k').value;
     localStorage.setItem("k", k);
 
+
+    if(localStorage.getItem('scoreX')== null){
+        localStorage.setItem('scoreX',0);
+    }
+
+    if(localStorage.getItem('scoreO')== null){
+        localStorage.setItem('scoreO',0);
+    }
 
 
 
@@ -105,7 +112,6 @@ function setUpGrid() {
 
 let currentPlayer = "X";
 let gameActive = true;
-
 let clickedByX = [];
 let clickedByO = [];
 
@@ -322,6 +328,10 @@ function checkDiagonal(k, n, i, boxes) {
 }
 
 function winnerFound() {
+
+
+    
+
 
     if (currentPlayer == "X") {
         scoreX = localStorage.getItem('scoreX');
