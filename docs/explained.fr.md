@@ -11,6 +11,8 @@ let currentPlayer = "";
 let gameActive = true;
 let clickedByX = [];
 let clickedByO = [];
+```
+
 Ces variables plus celles enregistrées dans le local storage suffisent pour la logique que j’utilise.
 La fonction pressBox() fait les choses suivantes :
 
@@ -30,13 +32,14 @@ Change le joueur courant.
 
 J’utilise la fonction findWinner() comme un routage : elle recherche le dernier joueur qui a joué et appelle les fonctions :
 
-javascript
-Copy code
+```javascript
+
 checkHorizontal(); 
 checkVertical(); 
 checkDiagonal();
-javascript
-Copy code
+```
+``` javascript
+
 if (currentPlayer == "X") {
     checkHorizontal(k, GridNumber, i, clickedByX);
     checkVertical(k, GridNumber, i, clickedByX);
@@ -47,6 +50,7 @@ if (currentPlayer == "O") {
     checkVertical(k, GridNumber, i, clickedByO);
     checkDiagonal(k, GridNumber, i, clickedByO);
 }
+```
 La logique que j’ai utilisée dans toutes les méthodes de vérification commence avec un compteur initialisé à 1 — la case cliquée doit être comptée — puis elle vérifie dans une direction s’il y a le même symbole et ajoute au compteur.
 Quand elle trouve une case différente, elle part dans la direction opposée et fait de même.
 Le point important est que j’utilise uniquement un système 1D dans la grille : toutes les cases ont un seul index et il ne doit pas y avoir de “retour à la ligne” vers les rangées précédentes ou suivantes (cela sera expliqué une par une).
@@ -56,7 +60,7 @@ La méthode checkHorizontal(k, n, i, boxes) a quatre arguments pour faciliter la
 
 En commençant par la plus difficile pour moi : la fonction checkHorizontal(). C’était difficile car c’était la première et je devais trouver la connexion mathématique entre k, n, la position à vérifier (j’ai utilisé les variables LeftBox et RightBox comme ci-dessous), ainsi que la première et la dernière colonne.
 
-javascript
+```javascript
 Copy code
 let leftBox = i - 1;
 while (leftBox >= 0 && leftBox % n !== n - 1 && boxes.includes(leftBox)) {
@@ -69,6 +73,8 @@ while (rightBox < n * n && rightBox % n !== 0 && boxes.includes(rightBox)) {
     count++;
     rightBox++;
 }
+``` 
+
 Principalement, je devais trouver la dernière colonne et la première.
 La première colonne est facile : puisque j’ai commencé avec l’index 0 pour les cases, l’index de la première colonne divisé par n donnera toujours un modulo = 0, ce qui conduit à la condition rightBox % n !== 0 dans la boucle.
 Et après un certain temps, j’ai trouvé que lorsque je divise l’index d’une case dans la dernière colonne par n, cela donne n - 1, ce qui nous donne la condition leftBox % n !== n - 1.
@@ -76,7 +82,7 @@ Les autres conditions garantissent que nous restons entre 0 et n*n (donc à l’
 
 Pour la fonction checkVertical(), nous devons vérifier au-dessus et au-dessous de la case cliquée. Clairement, je me déplace entre elles en ajoutant ou soustrayant n de son index.
 
-javascript
+``` javascript
 Copy code
 aboveBox = i - n;
 while (aboveBox >= 0 && boxes.includes(aboveBox)) {
@@ -90,13 +96,14 @@ while (underBox <= n * n && boxes.includes(underBox)) {
     count++;
     underBox = underBox + parseInt(n);
 }
+```
 Et il n’y a aucun moyen que cela dépasse dans une autre rangée, ni mathématiquement ni logiquement, donc c’était plus simple comme montré.
 
 Pour la vérification en diagonale, c’était amusant logiquement. J’ai ajouté la logique entre horizontal et vertical, j’ai su où mettre chaque condition pour éviter le retour à une autre ligne, et cela m’a donné une logique claire.
 Cependant, un point important à garder à l’esprit : il y a deux diagonales, de haut-droite à bas-gauche et de haut-gauche à bas-droite. J’ai géré cela en vérifiant la première, et si ce n’était pas un gagnant, je vérifiais l’autre.
 
-javascript
-Copy code
+```javascript
+
 while (upRight >= 0 && upRight % n !== 0 && boxes.includes(upRight)) {
     count++;
     upRight -= (n - 1);
@@ -127,6 +134,7 @@ if (count >= k) {
         downRight += n + 1;
     }
 }
+```
 Tout cela nous mène à la dernière étape : toutes ces fonctions appellent WinnerFound().
 Voici les étapes suivies :
 
