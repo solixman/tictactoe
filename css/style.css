@@ -224,6 +224,15 @@ align-items: center;
 
 
 #gameStatus{
+  margin: 0;
   color: #80A6B1;
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#score{
+  margin: 0;
+  color: #80A6B1;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-size: larger;
+      font-size: 130%;
 }

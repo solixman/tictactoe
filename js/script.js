@@ -29,8 +29,13 @@ function Play() {
     
 <div class="main" >
 <div style="display: flex; justify-content: center; align-items: center; margin =0">
-<h3 id='gameStatus'></h3>
-<h3 id='score'>X: ${localStorage.getItem('scoreX')}|${localStorage.getItem('scoreO')}:O</h3>
+<h3 id='score'>X: ${localStorage.getItem('scoreX')}|${localStorage.getItem('scoreO')} :O</h3>
+</div>
+
+
+<div style="display: flex; justify-content: center; align-items: center; margin =0">
+
+<h3 style="margin:0"; id='gameStatus'></h3>
 
 </div>
 <div class="gamePage" >
@@ -331,10 +336,13 @@ function winnerFound() {
     }
 
     document.getElementById('gameStatus').innerHTML = `
-            <h3 style="">winner is ${currentPlayer} </h3>
+            <h3 style=" color: #80A6B1;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-size: larger;
+      font-size: 170%; margin:0;" >winner is ${currentPlayer} </h3>
             `;
             document.getElementById('score').innerHTML=`
-            <h3 id='score'>X: ${localStorage.getItem('scoreX')}|${localStorage.getItem('scoreO')}:O</h3>        
+            <h3 id='score'>X: ${localStorage.getItem('scoreX')}|${localStorage.getItem('scoreO')} :O</h3>        
             `
 
     gameActive = false;
