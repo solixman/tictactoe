@@ -12,12 +12,12 @@ function Play() {
 
 
 
-    if (k < 3 || k > 10) {
+    if (parseInt(k) < 3) {
         alert("Veuillez entrer une valeur entre 3 et 10")
         return
     }
 
-    if (k > GridNumber) {
+    if (parseInt(k) > parseInt(GridNumber)) {
         alert('k cannot be bigger than the grid number');
         return;
     }
@@ -263,9 +263,11 @@ function checkVertical(k, n, i, boxes) {
    
     underBox = parseInt(i) + parseInt(n);
     while (underBox <= n * n && boxes.includes(underBox)) {
+        console.log('under');
         count++;
-        underBox = underBox + n;
+        underBox = underBox + parseInt(n);
     }
+    console.log(underBox);
 
     if (count >= k) {
         winnerFound();
@@ -273,5 +275,4 @@ function checkVertical(k, n, i, boxes) {
 
 
 }
-
 
