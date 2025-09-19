@@ -202,17 +202,118 @@ function findWinner(i) {
     if (currentPlayer == "X") {
 
         checkHorizontal(k, GridNumber, i, clickedByX);
-        checkVertical(k, GridNumber,i, clickedByX);
+        checkVertical(k, GridNumber, i, clickedByX);
+        checkDiagonal(k, GridNumber, i, clickedByX);
     }
     if (currentPlayer == "O") {
         checkHorizontal(k, GridNumber, i, clickedByO);
         checkVertical(k, GridNumber, i, clickedByO);
+        checkDiagonal(k, GridNumber, i, clickedByO);
     }
 
 }
 
 
 
+
+
+function checkHorizontal(k, n, i, boxes) {
+    let count = 1;
+    
+    let leftBox = i - 1;
+    while (leftBox >= 0 && leftBox % n !== n - 1 && boxes.includes(leftBox)) {
+        
+        count++;
+        leftBox--;
+    }
+    
+    let rightBox = i + 1;
+    while (rightBox < n * n && rightBox % n !== 0 && boxes.includes(rightBox)) {
+        count++;
+        rightBox++;
+    }
+    
+    
+    if (count >= k) {
+        winnerFound(currentPlayer);
+    }
+}
+
+
+function checkVertical(k, n, i, boxes) {
+    
+    let count = 1;
+    aboveBox = i - n;
+    
+    while (aboveBox >= 0 && boxes.includes(aboveBox)) {
+        count++;
+        aboveBox = aboveBox - n;
+    }
+    
+    
+    underBox = parseInt(i) + parseInt(n);
+    while (underBox <= n * n && boxes.includes(underBox)) {
+        console.log('under');
+        count++;
+        underBox = underBox + parseInt(n);
+    }
+    
+    if (count >= k) {
+        winnerFound(currentPlayer);
+    }
+}
+
+
+
+function checkDiagonal(k, n, i, boxes) {
+    n = parseInt(n);
+    i = parseInt(i);
+
+    let count = 1;
+    
+    let upRight = i - (n - 1);
+    let downLeft = i + n - 1;
+    
+    while (upRight >= 0 && upRight % n !== 0 && boxes.includes(upRight)) {
+        count++;
+        upRight -= (n - 1);
+    }
+    
+    while (downLeft <= n * n && downLeft % n !== n - 1 && boxes.includes(downLeft)) {
+        count++;
+        downLeft += n - 1;
+    }
+    
+    if(count >= k){
+     winnerFound(currentPlayer)
+     return
+    }else{
+        
+        let count = 1;
+        let upLeft = i - (n + 1);
+        let downRight = i + n + 1;
+        console.log('here')
+        while (upLeft >= 0 && upLeft % n !== n - 1 && boxes.includes(upLeft)) {
+            console.log('inside upleft')
+            count++;
+            upLeft -= (n + 1);
+        }
+        
+        while (downRight <= n * n && downRight % n !== 0 && boxes.includes(downRight)) {
+            console.log('inside downright')
+            count++
+            downRight+=n+1
+        }
+       if(count >= k){
+        winnerFound(currentPlayer)
+     return
+       }
+    }
+    
+    
+    
+    
+}
 
 function winnerFound() {
 
@@ -223,56 +324,3 @@ function winnerFound() {
     console.log('winner is ' + currentPlayer);
     return
 }
-
-
-
-
-function checkHorizontal(k, n, i, boxes) {
-    let count = 1;
-
-    let leftBox = i - 1;
-    while (leftBox >= 0 && leftBox % n !== n - 1 && boxes.includes(leftBox)) {
-
-        count++;
-        leftBox--;
-    }
-
-    let rightBox = i + 1;
-    while (rightBox < n * n && rightBox % n !== 0 && boxes.includes(rightBox)) {
-        count++;
-        rightBox++;
-    }
-
-
-    if (count >= k) {
-        winnerFound();
-    }
-}
-
-
-function checkVertical(k, n, i, boxes) {
-
-    let count = 1;
-    aboveBox = i - n;
-
-    while (aboveBox >= 0 && boxes.includes(aboveBox)) {
-        count++;
-        aboveBox = aboveBox - n;
-    }
-   
-   
-    underBox = parseInt(i) + parseInt(n);
-    while (underBox <= n * n && boxes.includes(underBox)) {
-        console.log('under');
-        count++;
-        underBox = underBox + parseInt(n);
-    }
-    console.log(underBox);
-
-    if (count >= k) {
-        winnerFound();
-    }
-
-
-}
-

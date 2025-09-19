@@ -175,6 +175,7 @@ align-items: center;
 }
 
 #StartNewGameButton{
+   margin-top: 2%;
     height: 9vh;
     width : 15vw;
     background-color: #64EFBD;
