@@ -110,7 +110,7 @@ function setUpGrid() {
 
 
 
-let currentPlayer = "X";
+let currentPlayer = "";
 let gameActive = true;
 let clickedByX = [];
 let clickedByO = [];
@@ -126,11 +126,15 @@ function pressBox(box) {
         return;
     }
 
+    if(currentPlayer  == ""){
+        currentPlayer="X";
+    }
 
 
     i = box.getAttribute("data-cell-index");
 
     box.innerHTML = "";
+
 
 
     if (currentPlayer === "X") {
