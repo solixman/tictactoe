@@ -9,17 +9,17 @@ function Play() {
     localStorage.setItem("k", k);
 
 
-    if(localStorage.getItem('scoreX')== null){
-        localStorage.setItem('scoreX',0);
+    if (localStorage.getItem('scoreX') == null) {
+        localStorage.setItem('scoreX', 0);
     }
 
-    if(localStorage.getItem('scoreO')== null){
-        localStorage.setItem('scoreO',0);
+    if (localStorage.getItem('scoreO') == null) {
+        localStorage.setItem('scoreO', 0);
     }
 
 
 
-    if (parseInt(GridNumber) < 3 || parseInt(GridNumber)>10 ) {
+    if (parseInt(GridNumber) < 3 || parseInt(GridNumber) > 10) {
         alert("Veuillez entrer une valeur entre 3 et 10")
         return
     }
@@ -77,6 +77,13 @@ function Play() {
 }
 
 
+function intialiseGame(P = 'X') {
+    clickedByO = [];
+    clickedByX = [];
+    gameActive = true;
+    currentPlayer = P;
+    setUpGrid();
+}
 
 
 function setUpGrid() {
@@ -126,8 +133,8 @@ function pressBox(box) {
         return;
     }
 
-    if(currentPlayer  == ""){
-        currentPlayer="X";
+    if (currentPlayer == "") {
+        currentPlayer = "X";
     }
 
 
@@ -191,17 +198,6 @@ function pressBox(box) {
 
 
 }
-
-
-function intialiseGame(P = 'X') {
-    clickedByO = [];
-    clickedByX = [];
-    gameActive = true;
-    currentPlayer = P;
-    setUpGrid();
-}
-
-
 
 
 
@@ -334,18 +330,18 @@ function checkDiagonal(k, n, i, boxes) {
 function winnerFound() {
 
 
-    
+
 
 
     if (currentPlayer == "X") {
         scoreX = localStorage.getItem('scoreX');
         scoreX++;
-        localStorage.setItem('scoreX',scoreX)
+        localStorage.setItem('scoreX', scoreX)
     }
     if (currentPlayer == "O") {
         scoreO = localStorage.getItem('scoreO')
         scoreO++;
-        localStorage.setItem('scoreO',scoreO)
+        localStorage.setItem('scoreO', scoreO)
     }
 
     document.getElementById('gameStatus').innerHTML = `
@@ -354,7 +350,7 @@ function winnerFound() {
    font-size: larger;
       font-size: 170%; margin:0;" >winner is ${currentPlayer} </h3>
             `;
-            document.getElementById('score').innerHTML=`
+    document.getElementById('score').innerHTML = `
             <h3 id='score'>X: ${localStorage.getItem('scoreX')}|${localStorage.getItem('scoreO')} :O</h3>        
             `
 
