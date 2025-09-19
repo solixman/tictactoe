@@ -12,7 +12,7 @@ function Play() {
 
 
 
-    if (parseInt(k) < 3) {
+    if (parseInt(GridNumber) < 3 || parseInt(GridNumber)>10 ) {
         alert("Veuillez entrer une valeur entre 3 et 10")
         return
     }
@@ -105,8 +105,7 @@ function setUpGrid() {
 
 let currentPlayer = "X";
 let gameActive = true;
-localStorage.setItem("scoreX", 0);
-localStorage.setItem("scoreO", 0);
+
 let clickedByX = [];
 let clickedByO = [];
 
