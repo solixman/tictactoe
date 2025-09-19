@@ -30,6 +30,8 @@ function Play() {
 <div class="main" >
 <div style="display: flex; justify-content: center; align-items: center; margin =0">
 <h3 id='gameStatus'></h3>
+<h3 id='score'>X: ${localStorage.getItem('scoreX')}|${localStorage.getItem('scoreO')}:O</h3>
+
 </div>
 <div class="gamePage" >
 
@@ -91,7 +93,7 @@ function setUpGrid() {
 
 
     }
-    let winner = '';
+
 }
 
 
@@ -219,21 +221,21 @@ function findWinner(i) {
 
 function checkHorizontal(k, n, i, boxes) {
     let count = 1;
-    
+
     let leftBox = i - 1;
     while (leftBox >= 0 && leftBox % n !== n - 1 && boxes.includes(leftBox)) {
-        
+
         count++;
         leftBox--;
     }
-    
+
     let rightBox = i + 1;
     while (rightBox < n * n && rightBox % n !== 0 && boxes.includes(rightBox)) {
         count++;
         rightBox++;
     }
-    
-    
+
+
     if (count >= k) {
         winnerFound(currentPlayer);
     }
@@ -241,23 +243,23 @@ function checkHorizontal(k, n, i, boxes) {
 
 
 function checkVertical(k, n, i, boxes) {
-    
+
     let count = 1;
     aboveBox = i - n;
-    
+
     while (aboveBox >= 0 && boxes.includes(aboveBox)) {
         count++;
         aboveBox = aboveBox - n;
     }
-    
-    
+
+
     underBox = parseInt(i) + parseInt(n);
     while (underBox <= n * n && boxes.includes(underBox)) {
         console.log('under');
         count++;
         underBox = underBox + parseInt(n);
     }
-    
+
     if (count >= k) {
         winnerFound(currentPlayer);
     }
@@ -270,25 +272,25 @@ function checkDiagonal(k, n, i, boxes) {
     i = parseInt(i);
 
     let count = 1;
-    
+
     let upRight = i - (n - 1);
     let downLeft = i + n - 1;
-    
+
     while (upRight >= 0 && upRight % n !== 0 && boxes.includes(upRight)) {
         count++;
         upRight -= (n - 1);
     }
-    
+
     while (downLeft <= n * n && downLeft % n !== n - 1 && boxes.includes(downLeft)) {
         count++;
         downLeft += n - 1;
     }
-    
-    if(count >= k){
-     winnerFound(currentPlayer)
-     return
-    }else{
-        
+
+    if (count >= k) {
+        winnerFound(currentPlayer)
+        return
+    } else {
+
         let count = 1;
         let upLeft = i - (n + 1);
         let downRight = i + n + 1;
@@ -298,29 +300,44 @@ function checkDiagonal(k, n, i, boxes) {
             count++;
             upLeft -= (n + 1);
         }
-        
+
         while (downRight <= n * n && downRight % n !== 0 && boxes.includes(downRight)) {
             console.log('inside downright')
             count++
-            downRight+=n+1
+            downRight += n + 1
         }
-       if(count >= k){
-        winnerFound(currentPlayer)
-     return
-       }
+        if (count >= k) {
+            winnerFound(currentPlayer)
+            return
+        }
     }
-    
-    
-    
-    
+
+
+
+
 }
 
 function winnerFound() {
 
+    if (currentPlayer == "X") {
+        scoreX = localStorage.getItem('scoreX');
+        scoreX++;
+        localStorage.setItem('scoreX',scoreX)
+    }
+    if (currentPlayer == "O") {
+        scoreO = localStorage.getItem('scoreO')
+        scoreO++;
+        localStorage.setItem('scoreO',scoreO)
+    }
+
     document.getElementById('gameStatus').innerHTML = `
             <h3 style="">winner is ${currentPlayer} </h3>
             `;
+            document.getElementById('score').innerHTML=`
+            <h3 id='score'>X: ${localStorage.getItem('scoreX')}|${localStorage.getItem('scoreO')}:O</h3>        
+            `
+
     gameActive = false;
-    console.log('winner is ' + currentPlayer);
+
     return
 }
