@@ -332,7 +332,6 @@ function winnerFound() {
 
 
 
-
     if (currentPlayer == "X") {
         scoreX = localStorage.getItem('scoreX');
         scoreX++;
