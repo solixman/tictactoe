@@ -117,7 +117,6 @@ function pressBox(box) {
 
 
     i = box.getAttribute("data-cell-index");
-console.log(i);
 
     box.innerHTML = "";
 
@@ -126,7 +125,7 @@ console.log(i);
 
 
         box.innerHTML = `
-        <div data-cell-index = ${i+1}  id="box">
+        <div data-cell-index = ${i + 1}  id="box">
         <img src="/src/icons/X.png" alt="X" style="width:95%; height:95%;">
         </div>
         `
@@ -137,15 +136,15 @@ console.log(i);
 
             findWinner(i);
         }
-          if (gameActive) {
-            
-              currentPlayer = "O";
-              
-              
-              document.getElementById('gameStatus').innerHTML = `
+        if (gameActive) {
+
+            currentPlayer = "O";
+
+
+            document.getElementById('gameStatus').innerHTML = `
               <h3 style="">it's ${currentPlayer}'s turn </h3>
               `;
-              }
+        }
     }
     else if (currentPlayer === "O") {
         box.innerHTML = `
@@ -162,14 +161,14 @@ console.log(i);
             findWinner(i);
         }
         if (gameActive) {
-            
+
             currentPlayer = "X"
-            
-            
+
+
             document.getElementById('gameStatus').innerHTML = `
             <h3 style="">it's ${currentPlayer}'s turn </h3>
             `;
-            }
+        }
     }
     box.setAttribute("data-played", "true");
 
@@ -178,11 +177,11 @@ console.log(i);
 }
 
 
-function intialiseGame() {
+function intialiseGame(P = 'X') {
     clickedByO = [];
     clickedByX = [];
     gameActive = true;
-    currentPlayer = "X";
+    currentPlayer = P;
     setUpGrid();
 }
 
@@ -201,14 +200,15 @@ function findWinner(i) {
 
 
     if (currentPlayer == "X") {
-        let boxes = clickedByX;
-        checkHorizontal(k ,GridNumber, i, boxes);
+
+        checkHorizontal(k, GridNumber, i, clickedByX);
+        checkVertical(k, GridNumber,i, clickedByX);
     }
     if (currentPlayer == "O") {
-        let boxes = clickedByO;
-        checkHorizontal(k,GridNumber, i, boxes);
+        checkHorizontal(k, GridNumber, i, clickedByO);
+        checkVertical(k, GridNumber, i, clickedByO);
     }
-    
+
 }
 
 
@@ -219,35 +219,59 @@ function winnerFound() {
     document.getElementById('gameStatus').innerHTML = `
             <h3 style="">winner is ${currentPlayer} </h3>
             `;
-    gameActive=false;
+    gameActive = false;
     console.log('winner is ' + currentPlayer);
-    return 
+    return
 }
 
 
 
 
 function checkHorizontal(k, n, i, boxes) {
-    let count = 1; 
+    let count = 1;
 
     let leftBox = i - 1;
-    while ( leftBox >= 0 &&  leftBox % n !== n - 1 &&  boxes.includes(leftBox) ) {
-        
+    while (leftBox >= 0 && leftBox % n !== n - 1 && boxes.includes(leftBox)) {
+
         count++;
         leftBox--;
     }
 
     let rightBox = i + 1;
-    while ( rightBox < n * n && rightBox % n !== 0 &&  boxes.includes(rightBox) ) {    
+    while (rightBox < n * n && rightBox % n !== 0 && boxes.includes(rightBox)) {
         count++;
         rightBox++;
     }
 
-    
+
     if (count >= k) {
         winnerFound();
     }
 }
 
+
+function checkVertical(k, n, i, boxes) {
+
+    let count = 1;
+    aboveBox = i - n;
+
+    while (aboveBox >= 0 && boxes.includes(aboveBox)) {
+        count++;
+        aboveBox = aboveBox - n;
+    }
+   
+   
+    underBox = parseInt(i) + parseInt(n);
+    while (underBox <= n * n && boxes.includes(underBox)) {
+        count++;
+        underBox = underBox + n;
+    }
+
+    if (count >= k) {
+        winnerFound();
+    }
+
+
+}
 
 
