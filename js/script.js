@@ -137,13 +137,15 @@ console.log(i);
 
             findWinner(i);
         }
-
-        currentPlayer = "O";
-
-
-        document.getElementById('gameStatus').innerHTML = `
-        <h3 style="">it's ${currentPlayer}'s turn </h3>
-        `;
+          if (gameActive) {
+            
+              currentPlayer = "O";
+              
+              
+              document.getElementById('gameStatus').innerHTML = `
+              <h3 style="">it's ${currentPlayer}'s turn </h3>
+              `;
+              }
     }
     else if (currentPlayer === "O") {
         box.innerHTML = `
@@ -159,12 +161,15 @@ console.log(i);
 
             findWinner(i);
         }
-        currentPlayer = "X"
-
-
-        document.getElementById('gameStatus').innerHTML = `
-        <h3 style="">it's ${currentPlayer}'s turn </h3>
-        `;
+        if (gameActive) {
+            
+            currentPlayer = "X"
+            
+            
+            document.getElementById('gameStatus').innerHTML = `
+            <h3 style="">it's ${currentPlayer}'s turn </h3>
+            `;
+            }
     }
     box.setAttribute("data-played", "true");
 
@@ -203,52 +208,46 @@ function findWinner(i) {
         let boxes = clickedByO;
         checkHorizontal(k,GridNumber, i, boxes);
     }
+    
+}
 
+
+
+
+function winnerFound() {
+
+    document.getElementById('gameStatus').innerHTML = `
+            <h3 style="">winner is ${currentPlayer} </h3>
+            `;
+    gameActive=false;
+    console.log('winner is ' + currentPlayer);
+    return 
 }
 
 
 
 
 function checkHorizontal(k, n, i, boxes) {
+    let count = 1; 
 
-
-    let count = 1;
     let leftBox = i - 1;
-    let rightBox = i + 1;
-
-    while (leftBox >= 0 && leftBox % n !== 0 &&   boxes.includes(leftBox)) {
+    while ( leftBox >= 0 &&  leftBox % n !== n - 1 &&  boxes.includes(leftBox) ) {
+        
         count++;
-        
-        
         leftBox--;
     }
-    console.log(leftBox)
-    if( (leftBox ==0 || i==1) &&  boxes.includes(i-1) ){
-        console.log('left')
-        count++;
-    }
 
-
-    while (rightBox <= (n * n) && rightBox % n !== 0 && boxes.includes(rightBox)) {
-        console.log('right')
+    let rightBox = i + 1;
+    while ( rightBox < n * n && rightBox % n !== 0 &&  boxes.includes(rightBox) ) {    
         count++;
         rightBox++;
     }
 
-
-    console.log(count);
-
+    
     if (count >= k) {
-
-        winnerFound()
-
+        winnerFound();
     }
-
 }
 
 
-function winnerFound() {
 
-    console.log('winner is ' + currentPlayer);
-    return
-}
