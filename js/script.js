@@ -3,23 +3,27 @@
 function Play() {
 
 
-        let GridNumber = document.getElementById('GridNumber').value;
-        localStorage.setItem("GridNumber",GridNumber);
-        
-        
-  
-    
-        let k = document.getElementById('k').value;
-        localStorage.setItem("k",k);
-        
+    let GridNumber = document.getElementById('GridNumber').value;
+    localStorage.setItem("GridNumber", parseInt(GridNumber));
 
-        if(k>GridNumber){
-            alert('k cannot be bigger than the grid number');
-            return;
-        }
-    
+    let k = document.getElementById('k').value;
+    localStorage.setItem("k", k);
 
-    
+
+
+
+    if (k < 3 || k > 10) {
+        alert("Veuillez entrer une valeur entre 3 et 10")
+        return
+    }
+
+    if (k > GridNumber) {
+        alert('k cannot be bigger than the grid number');
+        return;
+    }
+
+
+
     let body = document.getElementById('main');
     body.innerHTML = `
     
@@ -53,111 +57,198 @@ function Play() {
         
        
        `
-       
-       setUpGrid()
-       
-    }
-    
-    
-    
-    
-    function setUpGrid() {
-        
-        document.getElementById('gameStatus').innerHTML = `
-        <h3 style="">it's ${ currentPlayer }'s turn </h3>
-        `;
-         
-        GN =localStorage.getItem("GridNumber");
-        let boxes = document.getElementById('boxes');
-        
-        boxes.innerHTML = "";
-        
-        boxes.style.gridTemplateColumns = `repeat(${GN}, 1fr)`;
-        boxes.style.gridTemplateRows = `repeat(${GN}, 1fr)`;
-        
-        for (let i = 0; i < GN * GN; i++) {
-            
-            boxes.innerHTML += `    
-            <div data-cell-index = ${i+1}  id="box" onclick="pressBox(this)">
-            
-            </div>
-            
-        `
-      
 
+    setUpGrid()
 
-    }
-    
 }
 
 
 
-let currentPlayer="X";
-let gameActive=true;
-localStorage.setItem("scoreX",0);
-localStorage.setItem("scoreO",0);
-  let clicked = [];
+
+function setUpGrid() {
+
+    document.getElementById('gameStatus').innerHTML = `
+        <h3 style="">it's ${currentPlayer}'s turn </h3>
+        `;
+
+    GN = localStorage.getItem("GridNumber");
+    let boxes = document.getElementById('boxes');
+
+    boxes.innerHTML = "";
+
+    boxes.style.gridTemplateColumns = `repeat(${GN}, 1fr)`;
+    boxes.style.gridTemplateRows = `repeat(${GN}, 1fr)`;
+
+    for (let i = 0; i < GN * GN; i++) {
+
+        boxes.innerHTML += `    
+            <div data-cell-index = ${i}  id="box" onclick="pressBox(this)">
+            
+            </div>
+            
+        `
+
+
+
+    }
+    let winner = '';
+}
+
+
+
+let currentPlayer = "X";
+let gameActive = true;
+localStorage.setItem("scoreX", 0);
+localStorage.setItem("scoreO", 0);
+let clickedByX = [];
+let clickedByO = [];
 
 
 
 
 function pressBox(box) {
-    if(!gameActive){
+    if (!gameActive) {
         return;
     }
     if (box.getAttribute("data-played")) {
-        return; 
+        return;
     }
 
 
-     i=box.getAttribute("data-cell-index");
-    
 
-    box.innerHTML="";
-    
-    
-    if(currentPlayer === "X"){
-        
-        
-        box.innerHTML=`
-        <div data-cell-index = ${i}  id="box">
+    i = box.getAttribute("data-cell-index");
+console.log(i);
+
+    box.innerHTML = "";
+
+
+    if (currentPlayer === "X") {
+
+
+        box.innerHTML = `
+        <div data-cell-index = ${i+1}  id="box">
         <img src="/src/icons/X.png" alt="X" style="width:95%; height:95%;">
         </div>
         `
-       
-          clicked.push({"X":i});
-       currentPlayer="O";
-       document.getElementById('gameStatus').innerHTML = `
-        <h3 style="">it's ${ currentPlayer }'s turn </h3>
+
+        clickedByX.push(parseInt(i));
+
+        if (clickedByX.length >= localStorage.getItem('k')) {
+
+            findWinner(i);
+        }
+
+        currentPlayer = "O";
+
+
+        document.getElementById('gameStatus').innerHTML = `
+        <h3 style="">it's ${currentPlayer}'s turn </h3>
         `;
     }
     else if (currentPlayer === "O") {
-        box.innerHTML=`
+        box.innerHTML = `
         <div data-cell-index = ${i}  id="box"">
         <img src="/src/icons/O.png" alt="X" style="width:95%; height:95%;">
         </div>
         `
 
-    
-        
-        clicked.push({"O":i});
-        currentPlayer="X" 
+
+
+        clickedByO.push(parseInt(i));
+        if (clickedByO.length >= localStorage.getItem('k')) {
+
+            findWinner(i);
+        }
+        currentPlayer = "X"
+
+
         document.getElementById('gameStatus').innerHTML = `
-        <h3 style="">it's ${ currentPlayer }'s turn </h3>
+        <h3 style="">it's ${currentPlayer}'s turn </h3>
         `;
     }
     box.setAttribute("data-played", "true");
 
-  
+
 
 }
 
 
-function intialiseGame(){
-clicked = [];
-setUpGrid();
+function intialiseGame() {
+    clickedByO = [];
+    clickedByX = [];
+    gameActive = true;
+    currentPlayer = "X";
+    setUpGrid();
 }
 
 
 
 
+
+
+function findWinner(i) {
+
+
+    i = parseInt(i);
+    GridNumber = localStorage.getItem('GridNumber');
+    k = parseInt(localStorage.getItem('k'))
+
+
+
+    if (currentPlayer == "X") {
+        let boxes = clickedByX;
+        checkHorizontal(k ,GridNumber, i, boxes);
+    }
+    if (currentPlayer == "O") {
+        let boxes = clickedByO;
+        checkHorizontal(k,GridNumber, i, boxes);
+    }
+
+}
+
+
+
+
+function checkHorizontal(k, n, i, boxes) {
+
+
+    let count = 1;
+    let leftBox = i - 1;
+    let rightBox = i + 1;
+
+    while (leftBox >= 0 && leftBox % n !== 0 &&   boxes.includes(leftBox)) {
+        count++;
+        
+        
+        leftBox--;
+    }
+    console.log(leftBox)
+    if( (leftBox ==0 || i==1) &&  boxes.includes(i-1) ){
+        console.log('left')
+        count++;
+    }
+
+
+    while (rightBox <= (n * n) && rightBox % n !== 0 && boxes.includes(rightBox)) {
+        console.log('right')
+        count++;
+        rightBox++;
+    }
+
+
+    console.log(count);
+
+    if (count >= k) {
+
+        winnerFound()
+
+    }
+
+}
+
+
+function winnerFound() {
+
+    console.log('winner is ' + currentPlayer);
+    return
+}
